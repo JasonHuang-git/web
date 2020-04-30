@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>h5文件上传</title>
+	<meta charset="UTF-8" />
+	<style type="text/css">
+	.leftbox{
+	    width:50%;
+	    height:800px;
+	    border:1px #000 solid;
+	}
+	#fileOutput{
+	    width:90%;
+	    height:80%;
+	    border:1px #ccc solid;
+	}
+	</style>
+</head>
+
+<body>
+    <div class="leftbox">
+        <input id="fileInput" type="file" onchange="processFiles(this.files)" >
+        <!-- <input id="fileInput" type="file" onchange="processFiles(this.files)" multiple> -->
+        <div id="fileOutput">
+        </div>
+    </div>
+	<script type="text/javascript">
+	    function processFiles(files){
+		var file = files[0];   //从input提供的文件集中取得第一个文件。若要选择儿多个文件使用multiple属性如上html代码，那么这里就要用个for循环了。。。。
+		var reader = new FileReader(); //创建FileReader对象，以便处理文件
+		reader.onload = function(e){//这个时间一旦发生，就表明数据存储完成
+		    var output = document.getElementById('fileOutput');
+		    output.textContent = e.target.result;//将内容复制到div中
+		};
+		reader.readAsText(file);//将取出的文本内容转换为长字符串，保存在onload事件的e.target.result中。
+	    }
+	</script>
+</body>
+
+</html>
